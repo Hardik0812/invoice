@@ -11,3 +11,8 @@ class ClientAddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Clients
         fields = ('address',)
+
+class ClientnameAddressSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Clients
+        fields = ('name','address')

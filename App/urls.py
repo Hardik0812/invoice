@@ -1,23 +1,13 @@
-from django.urls import include, path
-from rest_framework import routers
+from django.urls import  path
 from . import views
 
-
-
-# create a router object
-router = routers.DefaultRouter()
- 
-# register the router
-router.register(r'clients/<int:pk>/name',views.ClientsViewSet, 'clientname')
-router.register(r'clients/<int:pk>/address',views.ClientaddressViewSet, 'clientaddress')
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
-
-
 urlpatterns = [
-    path('', include(router.urls)),
-    path('clients/<int:pk>/name',views.ClientsViewSet)
+    path('client/<str:pk>/name', views.clientName , name="client-name"),
+    path('client/<str:pk>/address', views.clientAddress , name="client-address"),
+    path('clientname/<str:pk>/address', views.clientnameAddress , name="client-name-address"),
     
+
 ]
+
+
 
