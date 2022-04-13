@@ -14,17 +14,22 @@ def clientName(request,pk):
     except Clients.DoesNotExist:
         client = None
     serializers = ClientsSerializer(client)
-
     return Response(serializers.data)
 
 @api_view(['GET'])
 def clientAddress(request,pk):
-    clientaddress = Clients.objects.get(id=pk)
+    try:
+        clientaddress = Clients.objects.get(id=pk)
+    except Clients.DoesNotExist:
+        clientaddress = None
     serializers = ClientAddressSerializer(clientaddress)
     return Response(serializers.data)
 
 @api_view(['GET'])
 def clientnameAddress(request,pk):
-    clientnameaddress = Clients.objects.get(id=pk)
+    try:
+        clientnameaddress = Clients.objects.get(id=pk)
+    except Clients.DoesNotExist:
+        clientnameaddress = None
     serializers = ClientnameAddressSerializer(clientnameaddress)
     return Response(serializers.data)
