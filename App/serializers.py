@@ -6,15 +6,21 @@ from .models import *
 class customerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ('id','name','address',)
+        fields = ('customer_id','name','address',)
 
 class customersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ('id','name',)
+        fields = ('customer_id','name',)
 
 class invoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
-        fields= ('id','currency_id',)
-    
+        fields = ('invoice_id','currency_id',)
+
+class addinvoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Invoice_detail
+        fields = ('__all__')
+        #('date','currency_id','customer_id','sr_no','description','rate','quantity','paid','note',)
+        

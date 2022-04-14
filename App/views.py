@@ -10,7 +10,7 @@ from rest_framework import status
 @api_view(['GET'])
 def customer_info(request,pk):
     try:
-        customer = Customer.objects.get(id=pk)
+        customer = Customer.objects.get(customer_id=pk)
     except Customer.DoesNotExist:
         customer = None
     serializers = customerSerializer(customer)
@@ -40,6 +40,21 @@ def invoice_info(request):
         serializers = invoiceSerializer(invoice, many=True,context={'request': request})
     return Response(serializers.data)
 
+@api_view(['POST'])
+def add_invoice(request):
+    serializers = addinvoiceSerializer(data=request.data,many=True)
+    if serializers.is_valid():
+        serializers.save()
+        return Response(serializers.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response("please enter all values", status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def add_invoice_get(request):
+    if request.method == 'GET':
+        invoice = Invoice_detail.objects.all()
+        serializers = addinvoiceSerializer(invoice, many=True,context={'request': request})
+    return Response(serializers.data)
 # # @api_view(['GET'])
 # # def clientAddress(request,pk):
 # #     try:

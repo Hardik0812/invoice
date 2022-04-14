@@ -134,3 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 ALLOWED_HOSTS=['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
+USE_L10N = False
