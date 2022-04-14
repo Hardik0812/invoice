@@ -8,7 +8,7 @@ from rest_framework import status
 
 # Create your views here.
 @api_view(['GET'])
-def Customer_info(request,pk):
+def customer_info(request,pk):
     try:
         customer = Customer.objects.get(id=pk)
     except Customer.DoesNotExist:
@@ -17,7 +17,7 @@ def Customer_info(request,pk):
     return Response(serializers.data)
 
 @api_view(['POST'])
-def addCustomer(request):
+def addcustomer(request):
     serializers = customerSerializer(data=request.data)
     if serializers.is_valid():
         serializers.save()
@@ -26,9 +26,18 @@ def addCustomer(request):
         return Response("please enter {name} and {address}", status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def Customers(request):
-    customers = Customer.objects.all()
-    serializers = customersSerializer(customers)
+def customers(request):
+    if request.method == 'GET':
+        customers = Customer.objects.all()
+        serializers = customersSerializer(customers, many=True)
+    return Response(serializers.data)
+
+
+@api_view(['GET'])
+def invoice_info(request):
+    if request.method == 'GET':
+        invoice = Invoice.objects.all()
+        serializers = invoiceSerializer(invoice, many=True,context={'request': request})
     return Response(serializers.data)
 
 # # @api_view(['GET'])
