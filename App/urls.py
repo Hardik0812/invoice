@@ -2,11 +2,10 @@ from django.urls import  path
 from . import views
 
 urlpatterns = [
-    path('client/<str:pk>/name', views.clientName , name="client-name"),
-    path('client/<str:pk>/address', views.clientAddress , name="client-address"),
-    path('clientname/<str:pk>/address', views.clientnameAddress , name="client-name-address"),
-    
-
+path('customer/<str:pk>',views.Customer_info, name = "customer_info"),
+path('customer',views.addCustomer, name = "add_customer_info"),
+path('customers',views.Customers, name = "customers_name_id"),
+ 
 ]
 
 

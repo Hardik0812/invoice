@@ -1,18 +1,14 @@
 from rest_framework import serializers
-from .models import Clients
+from .models import Customer,Currency
 
 
-class ClientsSerializer(serializers.HyperlinkedModelSerializer):
+
+class customerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Clients
-        fields = ('name',)
+        model = Customer
+        fields = ('id','name','address',)
 
-class ClientAddressSerializer(serializers.HyperlinkedModelSerializer):
+class customersSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Clients
-        fields = ('address',)
-
-class ClientnameAddressSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Clients
-        fields = ('name','address')
+        model = Customer
+        fields = ('id','name',)
