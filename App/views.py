@@ -38,7 +38,7 @@ def customers(request):
 @api_view(['GET'])
 def invoice_info(request):
     if request.method == 'GET':
-        invoice = Invoice.objects.all()
+        invoice = Invoice.objects.all().order_by('id')
         serializers = invoiceSerializer(invoice, many=True,context={'request': request})
     return Response(serializers.data)
 

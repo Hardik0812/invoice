@@ -15,14 +15,8 @@ class customersSerializer(serializers.ModelSerializer):
 class invoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
-        fields = ('id','currency_id',)
-
-class invoiceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Invoice
-        fields = ('date','id','paid','note','customer_id',)
+        fields = ('id','customer_id','currency_id','paid','note','date',)
         
-
 class addinvoiceSerializer(serializers.ModelSerializer):
    #invoice_set = invoiceSerializer(many=True)
     class Meta:
