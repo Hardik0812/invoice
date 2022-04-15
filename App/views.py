@@ -1,3 +1,4 @@
+from locale import currency
 from .serializers import *
 from .models import *
 from rest_framework.decorators import api_view
@@ -9,7 +10,7 @@ from rest_framework import status
 @api_view(['GET'])
 def customer_info(request,pk):
     try:
-        customer = Customer.objects.get(customer_id=pk)
+        customer = Customer.objects.get(id=pk)
     except Customer.DoesNotExist:
         customer = None
     serializers = customerSerializer(customer)
@@ -44,7 +45,8 @@ def invoice_info(request):
 # Add invoice information
 @api_view(['POST'])
 def add_invoice(request):
-    serializers = addinvoiceSerializer(data=request.data,many=True)
+    serializers = addinvoiceSerializer(data=request.data)
+    
     if serializers.is_valid():
         serializers.save()
         return Response(serializers.data, status=status.HTTP_201_CREATED)
