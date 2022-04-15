@@ -7,6 +7,8 @@ from rest_framework import status
 
 
 # Create your views here.
+
+# Get customer information by ID
 @api_view(['GET'])
 def customer_info(request,pk):
     try:
@@ -16,6 +18,7 @@ def customer_info(request,pk):
     serializers = customerSerializer(customer)
     return Response(serializers.data)
 
+# Add customer information
 @api_view(['POST'])
 def addcustomer(request):
     serializers = customerSerializer(data=request.data)
@@ -23,8 +26,9 @@ def addcustomer(request):
         serializers.save()
         return Response(serializers.data, status=status.HTTP_201_CREATED)
     else:
-        return Response("please enter {name} and {address}", status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
+# Get All customers 
 @api_view(['GET'])
 def customers(request):
     if request.method == 'GET':
@@ -32,7 +36,7 @@ def customers(request):
         serializers = customersSerializer(customers, many=True)
     return Response(serializers.data)
 
-
+# Get Invoice information
 @api_view(['GET'])
 def invoice_info(request):
     if request.method == 'GET':
@@ -40,6 +44,7 @@ def invoice_info(request):
         serializers = invoiceSerializer(invoice, many=True,context={'request': request})
     return Response(serializers.data)
 
+# Add invoice information
 @api_view(['POST'])
 def add_invoice(request):
     serializers = addinvoiceSerializer(data=request.data,many=True)
@@ -47,14 +52,21 @@ def add_invoice(request):
         serializers.save()
         return Response(serializers.data, status=status.HTTP_201_CREATED)
     else:
-        return Response("please enter all values", status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET'])
-def add_invoice_get(request):
-    if request.method == 'GET':
-        invoice = Invoice_detail.objects.all()
-        serializers = addinvoiceSerializer(invoice, many=True,context={'request': request})
-    return Response(serializers.data)
+
+
+
+def increment_invoice_number():
+    last_invoice = Invoice.objects.all().order_by('id').last()
+    if not last_invoice:
+         return '01-22/23'
+    invoice_no = last_invoice.invoice_no
+    invoice_int = int(invoice_no.split('01-22/23')[-1])
+    new_invoice_int = invoice_int + 1
+    new_invoice_no = '01-22/23' + str(new_invoice_int)
+    return new_invoice_no
+   
 # # @api_view(['GET'])
 # # def clientAddress(request,pk):
 # #     try:

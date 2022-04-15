@@ -18,9 +18,10 @@ class invoiceSerializer(serializers.ModelSerializer):
         model = Invoice
         fields = ('invoice_id','currency_id',)
 
+
 class addinvoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice_detail
-        fields = ('__all__')
-        #('date','currency_id','customer_id','sr_no','description','rate','quantity','paid','note',)
-        
+        fields = ('sr_no','description','rate','quantity',)
+
+
