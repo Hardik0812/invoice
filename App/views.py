@@ -46,13 +46,14 @@ def addcustomer(request):
 # Add invoice information
 @api_view(['POST'])
 def add_invoice(request):
-    serializers = addinvoiceSerializer(data=request.data) 
-    if serializers.is_valid():
-        serializers.save()
-        return Response(serializers.data, status=status.HTTP_202_ACCEPTED)
-    else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
+    serializers = addinvoiceSerializer(data=request.data,many = True)
+    print(serializers) 
+    if serializers.is_valid() == False:
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    items = serializers.create()
+    serializers.save()
+    serializers = addinvoiceSerializer(items,many=True)
+    return Response(serializers.data)
 
 
    

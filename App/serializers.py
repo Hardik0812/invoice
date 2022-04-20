@@ -1,3 +1,4 @@
+from doctest import debug_script
 from rest_framework import serializers
 from .models import *
 
@@ -15,20 +16,13 @@ class customersSerializer(serializers.ModelSerializer):
 class invoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
-        fields = ('id','customer_id','currency_id','paid','note','date',)
+        fields = ('id','date','customer_id','currency_id','paid','note',)
         
 class addinvoiceSerializer(serializers.ModelSerializer):
-   #invoice_set = invoiceSerializer(many=True)
+    items = invoiceSerializer(many=True)
     class Meta:
         model = Invoice_detail
-        fields = ('sr_no','description','rate','quantity',)
+        fields = ('sr_no','description','rate','quantity','items',)
 
-
-    # def create(self, validated_data):
-    #     invoice_details_data = validated_data.pop('invoice_set')
-    #     invoice= Invoice.objects.create(**validated_data)
-    #     for invoice_detail_data in invoice_details_data :
-    #         Invoice.objects.create(invoice=invoice, **invoice_detail_data )
-    #     return invoice 
 
 
