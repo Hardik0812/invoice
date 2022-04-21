@@ -33,7 +33,7 @@ class Invoice(models.Model):
         new_invoice_no = 'MAG' + str(new_invoice_int)
         return new_invoice_no
 
-    id = models.CharField(primary_key=True,max_length=500, default=increment_invoice_number)
+    id = models.AutoField(primary_key=True,auto_created=True)
     date = models.DateField()
     currency_id = models.ForeignKey(Currency,on_delete=models.CASCADE)
     customer_id = models.ForeignKey(Customer,on_delete=models.CASCADE)
@@ -44,7 +44,7 @@ class Invoice(models.Model):
 
 
 class Invoice_detail(models.Model):
-    id = models.CharField(primary_key=True,max_length=1000)
+    id = models.AutoField(primary_key=True,auto_created=True)
     sr_no = models.IntegerField()
     description = models.TextField(max_length=1000)
     rate = models.FloatField()
