@@ -27,7 +27,7 @@ class Invoice(models.Model):
         last_invoice = Invoice.objects.all().order_by('invoice_id').last()
         if not last_invoice:
             return '01' + "-" + getcurrentfinancialyear()
-        invoice_no = last_invoice
+        invoice_no = str(last_invoice)
         invoice_str = invoice_no.split('-')[:1]
         new_invoice_int = int(invoice_str[0])
         new_invoice_str = str(new_invoice_int + 1)

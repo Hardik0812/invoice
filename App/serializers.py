@@ -17,6 +17,12 @@ class invoiceSerializer(serializers.ModelSerializer):
         model = Invoice
         fields = ('invoice_id','date','customer_id','currency_id','paid','note',)
 
+
+
+
+
+
+
 class addinvoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item_details
@@ -24,14 +30,16 @@ class addinvoiceSerializer(serializers.ModelSerializer):
    
 class invoicedetailSerializer(serializers.ModelSerializer):
     details = addinvoiceSerializer(many=True)
+
     class Meta:
         model = Invoice
         fields = ('customer_id','currency_id','date','paid','note','details')
    
     def create(self, validated_data):
         details_data = validated_data.pop('details')
-        detail = Invoice.objects.create(**validated_data)
-        for detail_data in details_data:
-            Item_details.objects.create(detail=detail, **detail_data)
-        return detail
+        invoice = Item_details.objects.create(**validated_data)
+        for i in details_data:
 
+        return detail_data
+
+https://medium.com/@rushic24/creating-nested-serializers-in-django-rest-framework-5110c6674fba
