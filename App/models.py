@@ -52,7 +52,7 @@ class Invoice(models.Model):
 
 
 class Item_details(models.Model):
-    invoice_id = models.ForeignKey(Invoice,on_delete=models.CASCADE)
+    invoice_id = models.ForeignKey(Invoice,on_delete=models.CASCADE,related_name="details")
     sr_no = models.IntegerField()
     description = models.TextField(max_length=1000)
     rate = models.FloatField()

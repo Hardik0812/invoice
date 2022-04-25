@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer,Invoice,Item_details,Currency
+from .models import Customer,Invoice,Item_details
 
 
 class customerSerializer(serializers.ModelSerializer):
@@ -15,13 +15,7 @@ class customersSerializer(serializers.ModelSerializer):
 class invoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Invoice
-        fields = ('invoice_id','date','customer_id','currency_id','paid','note',)
-
-
-
-
-
-
+        fields = ('invoice_id','currency_id',)
 
 class addinvoiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,16 +24,17 @@ class addinvoiceSerializer(serializers.ModelSerializer):
    
 class invoicedetailSerializer(serializers.ModelSerializer):
     details = addinvoiceSerializer(many=True)
-
     class Meta:
         model = Invoice
         fields = ('customer_id','currency_id','date','paid','note','details')
-   
+
     def create(self, validated_data):
-        details_data = validated_data.pop('details')
-        invoice = Item_details.objects.create(**validated_data)
-        for i in details_data:
+        invoice_details = validated_data.pop('details')
+        new_details = Invoice.objects.create(**validated_data)
+        for i in invoice_details:
+            Item_details.objects.create(**i,invoice_id=new_details)
+            return new_details
+   
 
-        return detail_data
+      
 
-https://medium.com/@rushic24/creating-nested-serializers-in-django-rest-framework-5110c6674fba
