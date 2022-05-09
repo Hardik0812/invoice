@@ -31,10 +31,18 @@ class invoicedetailSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         invoice_details = validated_data.pop('details')
         new_details = Invoice.objects.create(**validated_data)
+        
         for i in invoice_details:
-            Item_details.objects.create(**i,invoice_id=new_details)
-            return new_details
-   
+            Item_details.objects.create(invoice_id=new_details,**i)
+        return new_details
+      
+      
+      
+      
+      
+        # for i in invoice_details:
+        #     Item_details.objects.create(**i,invoice_id=new_details)
+        #     return new_details
 
       
 

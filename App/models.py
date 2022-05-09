@@ -61,4 +61,4 @@ class Item_details(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.description
+        return str(self.invoice_id)[:2] + "--" + (self.description)

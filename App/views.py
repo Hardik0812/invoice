@@ -1,10 +1,10 @@
+from django.http import JsonResponse
 from .serializers import *
 from .models import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from datetime import date
-from django.db.models import Max
 # Create your views here.
 
 # Get customer information by ID
@@ -46,7 +46,7 @@ def addcustomer(request):
 # Add invoice information
 @api_view(['POST'])
 def add_invoice(request):
-    serializers = invoicedetailSerializer(data=request.data,many=True)                      
+    serializers = invoicedetailSerializer(data=request.data,many=True)  
     if serializers.is_valid():
         serializers.save()
         return Response(serializers.data, status=status.HTTP_202_ACCEPTED)
