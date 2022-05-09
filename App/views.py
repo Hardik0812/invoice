@@ -8,14 +8,14 @@ from datetime import date
 # Create your views here.
 
 # Get customer information by ID
-@api_view(['GET'])
-def customer_info(request,pk):
-    try:
-        customer = Customer.objects.get(customer_id=pk)
-    except Customer.DoesNotExist:
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    serializers = customerSerializer(customer)
-    return Response(serializers.data,status=status.HTTP_200_OK)
+# @api_view(['GET'])
+# def customer_info(request,pk):
+#     try:
+#         customer = Customer.objects.get(customer_id=pk)
+#     except Customer.DoesNotExist:
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+#     serializers = customerSerializer(customer)
+#     return Response(serializers.data,status=status.HTTP_200_OK)
 
 # Get All customers 
 @api_view(['GET'])
@@ -36,7 +36,7 @@ def invoice_info(request):
 # Add customer information
 @api_view(['POST'])
 def addcustomer(request):
-    serializers = customerSerializer(data=request.data)
+    serializers = customersSerializer(data=request.data)
     if serializers.is_valid():
         serializers.save()
         return Response(serializers.data, status=status.HTTP_202_ACCEPTED)

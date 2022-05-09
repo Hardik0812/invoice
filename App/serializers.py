@@ -2,15 +2,11 @@ from rest_framework import serializers
 from .models import Customer,Invoice,Item_details
 
 
-class customerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Customer
-        fields = ('customer_id','name','address',)
 
 class customersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ('customer_id','name',)
+        fields = ('customer_id','name','address',)
 
 class invoiceSerializer(serializers.ModelSerializer):
     class Meta:
