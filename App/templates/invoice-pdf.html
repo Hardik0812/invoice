@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="invoice-pdf.css" rel="stylesheet">
+    <title>invoice-pdf</title>
+</head>
+
+<body class="mx-auto d-flex flex-column">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between mt-4">
+            <img src="qodeteam-logo.svg" alt="QodeTeam">
+            <p>Date - DD/MM/YYYY</p>
+        </div>
+    </div>
+    <div class="separator-container bg-warning position-relative mt-4">
+        <div class="separator position-absolute top-50 d-flex align-items-center p-4">
+            <span class="invoice-label text-uppercase">Invoice</span>
+            <span class="invoice-no ps-4">#100 - 22/23</span>
+        </div>
+    </div>
+    <div class="container-fluid address-section">
+        <div class="d-flex flex-column h-100">
+            <div class="d-flex justify-content-between mt-5">
+                <p>From :-</br>C-806, Titanium City Center,</br>Anand Nagar Main Road, Ahmedabad- 380015</br>Phone :
+                    +91
+                    9106250201</br>Email:contact@qodeteam.com
+                </p>
+                <p>To :-</br>
+                    XYZ Pvt. LTD</br>C-806, Titanium City Center, Anand Nagar</br>Main Road, Ahmedabad- 380015
+                </p>
+            </div>
+            <span class="mt-3">HSN Code : 998314</span>
+            <div class="table-section mt-5 border border-2 overflow-hidden">
+                <table class="table table-striped h-100">
+                    <thead>
+                        <tr class="table-dark text-white">
+                            <th scope="col" class="col-1">#</th>
+                            <th scope="col" class="col-5">Description</th>
+                            <th scope="col" class="col-2 text-end">Rate</th>
+                            <th scope="col" class="col-2 text-end">Quantity</th>
+                            <th scope="col" class="col-2 text-end">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td></td>
+                            <td class="text-end">$1000000.00</td>
+                            <td></td>
+                            <td class="text-end">$10.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td></td>
+                            <td class="text-end">$100.00</td>
+                            <td></td>
+                            <td class="text-end">$100.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td></td>
+                            <td class="text-end">$1000.00</td>
+                            <td></td>
+                            <td class="text-end">$1000.00</td>
+                        </tr>
+                        <tr class="h-100"></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">Sum</td>
+                            <td class="text-end">$0.00</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">GST</td>
+                            <td class="text-end">$0.00</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">Total</td>
+                            <td class="text-end">$0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <span class="mt-5">Notes</span>
+            <p class="mt-5">This is computer generated invoice, no signature required.</p>
+        </div>
+    </div>
+    <footer class="bg-warning text-white text-center fs-4 my-5">Thank you for doing business with us!</footer>
+</body>
+
+</html>

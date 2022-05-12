@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'App',
     'corsheaders',
+    'wkhtmltopdf',
+    'rest_framework_swagger',
 
 ]
 
@@ -59,7 +61,7 @@ ROOT_URLCONF = 'invoice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

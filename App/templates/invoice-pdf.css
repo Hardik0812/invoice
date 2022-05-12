@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 210mm;
+    height: 297mm;
+}
+
+.container-fluid {
+    padding: 0 2rem;
+}
+
+.separator-container {
+    height: 1.75rem;
+}
+
+.separator {
+    left: 50%;
+    transform: translate(-20%, -50%);
+    background-color: #fff;
+}
+
+.invoice-label {
+    font-size: 56px;
+}
+
+.invoice-no {
+    font-size: 1.2rem;
+}
+
+.address-section {
+    flex: 1;
+}
+
+.table-section {
+    flex: 1;
+    border-radius: 1rem;
+}
+
+table {
+    table-layout: fixed;
+}

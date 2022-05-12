@@ -1,10 +1,9 @@
-from django.http import JsonResponse
-from .serializers import *
-from .models import *
-from rest_framework.decorators import api_view
+from .serializers import customersSerializer,invoiceSerializer,invoicedetailSerializer
+from .models import Customer,Invoice,increment_invoice_number
 from rest_framework.response import Response
 from rest_framework import status
-from datetime import date
+from rest_framework.views import APIView
+from django.http import JsonResponse
 # Create your views here.
 
 # Get customer information by ID
@@ -17,39 +16,39 @@ from datetime import date
 #     serializers = customerSerializer(customer)
 #     return Response(serializers.data,status=status.HTTP_200_OK)
 
+
 # Get All customers 
-@api_view(['GET'])
-def customers(request):
-    if request.method == 'GET':
-        customers = Customer.objects.all()
+class customers(APIView):                  
+    def get(self, request):
+        customers = Customer.objects.all()     
         serializers = customersSerializer(customers, many=True)
-    return Response(serializers.data, status=status.HTTP_200_OK)
+        return Response(serializers.data, status=status.HTTP_200_OK)    
 
 # Get Invoice information
-@api_view(['GET'])
-def invoice_info(request):
-    if request.method == 'GET':
-        invoice = Invoice.objects.all()
+class invoice_info(APIView):
+    def get(self,request):
+        invoice = [Invoice.objects.last()]
         serializers = invoiceSerializer(invoice, many=True)
-    return Response(serializers.data,status=status.HTTP_200_OK)
+        return Response(serializers.data,status=status.HTTP_200_OK)
 
 # Add customer information
-@api_view(['POST'])
-def addcustomer(request):
-    serializers = customersSerializer(data=request.data)
-    if serializers.is_valid():
-        serializers.save()
-        return Response(serializers.data, status=status.HTTP_202_ACCEPTED)
-    else:
+class addcustomer(APIView):
+    def post(self,request):
+        serializers = customersSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_202_ACCEPTED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 # Add invoice information
-@api_view(['POST'])
-def add_invoice(request):
-    serializers = invoicedetailSerializer(data=request.data,many=True)  
-    if serializers.is_valid():
-        serializers.save()
-        return Response(serializers.data, status=status.HTTP_202_ACCEPTED)
-    else:
+class add_invoice(APIView):
+    def post(self , request):
+        serializers = invoicedetailSerializer(data=request.data,many=True)  
+        if serializers.is_valid():
+            serializers.save()
+            return Response({increment_invoice_number()},status=status.HTTP_202_ACCEPTED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+#################    Generating PDF   #########################
 
