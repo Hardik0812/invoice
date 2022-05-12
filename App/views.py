@@ -3,7 +3,7 @@ from .models import Customer,Invoice,increment_invoice_number
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from django.http import JsonResponse
+from .function import getcurrentfinancialyear
 # Create your views here.
 
 # Get customer information by ID
@@ -16,7 +16,6 @@ from django.http import JsonResponse
 #     serializers = customerSerializer(customer)
 #     return Response(serializers.data,status=status.HTTP_200_OK)
 
-
 # Get All customers 
 class customers(APIView):                  
     def get(self, request):
@@ -27,8 +26,9 @@ class customers(APIView):
 # Get Invoice information
 class invoice_info(APIView):
     def get(self,request):
-        invoice = [Invoice.objects.last()]
-        serializers = invoiceSerializer(invoice, many=True)
+        invoice = Invoice.objects.last()
+        print(invoice)
+        serializers = invoiceSerializer({invoice}, many=True)
         return Response(serializers.data,status=status.HTTP_200_OK)
 
 # Add customer information
@@ -46,7 +46,7 @@ class add_invoice(APIView):
         serializers = invoicedetailSerializer(data=request.data,many=True)  
         if serializers.is_valid():
             serializers.save()
-            return Response({increment_invoice_number()},status=status.HTTP_202_ACCEPTED)
+            return Response({"invoice_id":increment_invoice_number()},status=status.HTTP_202_ACCEPTED)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
